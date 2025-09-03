@@ -47,12 +47,9 @@ const Register = () => {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center px-4"
-      
-    >
-      <div className="bg-white/80 backdrop-blur-md border border-gray-200 shadow-2xl p-10 rounded-3xl w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center  mb-8 tracking-tight">
+    <div className="min-h-screen flex items-center justify-center px-2 bg-gradient-to-br from-blue-50 to-indigo-50 ">
+      <div className="bg-white/80 backdrop-blur-md border border-gray-200 shadow-2xl p-7 rounded-3xl w-full max-w-md">
+        <h2 className="text-3xl font-bold text-center  mb-5 tracking-tight">
           Create Account 🐶
         </h2>
 
@@ -153,9 +150,7 @@ const Register = () => {
                 type="submit"
                 disabled={isSubmitting || loading}
                 className={`w-full text-white py-3 rounded-xl transition duration-300 font-semibold shadow-md ${
-                  loading
-                    ? "bg-primary/80"
-                    : "bg-primary"
+                  loading ? "bg-primary/80" : "bg-primary"
                 }`}
               >
                 {loading ? "Registering..." : "Register"}
@@ -168,7 +163,7 @@ const Register = () => {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-emerald-700 hover:underline font-medium"
+            className="text-primary hover:underline font-medium"
           >
             Login
           </Link>

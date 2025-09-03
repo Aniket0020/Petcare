@@ -82,7 +82,7 @@ const DashboardNavbar = () => {
                     {renderLinks()}
                 </div>
 
-                {/* Mobile Menu Toggle */}
+              
                 <div className="md:hidden">
                     <button onClick={() => setMenuOpen(true)}>
                         <Menu className="w-6 h-6" />
@@ -90,7 +90,7 @@ const DashboardNavbar = () => {
                 </div>
             </div>
 
-            {/* Mobile Sliding Menu */}
+         
             <AnimatePresence>
                 {menuOpen && (
                     <motion.div

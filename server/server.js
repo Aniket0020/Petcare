@@ -12,8 +12,8 @@ const activateRoute = require('./routes/Activate');
 const app = express();
 
 
-// Import your Code model
-const Code = require('./model/code'); // Adjust the path as needed
+
+const Code = require('./model/code'); 
 
 
 
@@ -28,12 +28,12 @@ app.use(cors({
     credentials: true // Allow credentials (cookies, authorization headers)
 }));
 
-// Basic Route
+
 app.get('/', (req, res) => {
     res.send("Server OK!");
 });
 
-// Routes setup
+
 
 app.use('/user', userRoute);
 app.use("/profile", profileRoute);
@@ -41,7 +41,7 @@ app.use("/pet", petRoute);
 app.use("/doctor", doctorRoutes);
 app.use('/QR', activateRoute);
 
-// Add this after other app.use() and before app.listen()
+
 app.get('/qr/:code', async (req, res) => {
     try {
         const resCode = await Code.findOne();
@@ -51,7 +51,7 @@ app.get('/qr/:code', async (req, res) => {
             return res.status(404).send("QR code not found or not activated yet.");
         }
 
-        // Redirect to the stored destination URL
+        // Redirect to stored destination URL
         res.redirect(qr.url);
         
 
@@ -62,15 +62,15 @@ app.get('/qr/:code', async (req, res) => {
 });
 
 
-// MongoDB connection
+
 mongoose.connect(process.env.DATABASE_URL)
     .then(() => console.log("DB connected"))
     .catch((err) => {
         console.error("Failed to connect to MongoDB server", err);
-        process.exit(1); // Exit if DB connection fails
+        process.exit(1); 
     });
 
-// Set port dynamically from .env or default to 3000
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

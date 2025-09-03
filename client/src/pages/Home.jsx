@@ -3,105 +3,107 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="min-h-screen  text-gray-800 ">
+    <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="flex flex-col md:flex-row items-center gap-3 justify-between px-6 md:px-20 py-24 ">
+      <section className="flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-20 py-20 bg-gradient-to-r from-gray-50 to-gray-100">
+        <div className="max-w-lg text-center md:text-left">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+            Keep Your Pet <span className="text-primary">Safe</span> & Connected
+          </h1>
+          <p className="mt-6 text-lg text-gray-600">
+            With our NFC-enabled pet tags, your furry friend is always just a
+            tap away from being found.
+          </p>
+          <div className="mt-8 flex flex-col md:flex-row gap-4 md:gap-6">
+            <Link
+              to="/register"
+              className="bg-primary text-white font-semibold px-6 py-3 rounded-full shadow hover:opacity-90 transition"
+            >
+              Register Your Pet
+            </Link>
+            <Link
+              to="/shop"
+              className="border border-primary text-primary font-semibold px-6 py-3 rounded-full hover:bg-primary hover:text-white transition"
+            >
+              Shop Tags
+            </Link>
+          </div>
+        </div>
+
         <img
           src="/img/dog2.jpg"
           alt="NFC Dog Tag"
-          className="w-full md:w-1/2 mt-12 md:mt-0 rounded-3xl shadow-2xl "
+          className="w-full md:w-1/2 rounded-3xl shadow-xl mb-8 md:mb-0"
         />
-        <div className="max-w-xl">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6  animate-fade-in">
-            Smart NFC Tags For Your Pet
-          </h1>
-          <p className="text-xl mb-8  leading-relaxed">
-            Reunite faster with your furry friend using our NFC-enabled pet
-            tags. Just a tap and your pet's profile is shared instantly.
-          </p>
-          <Link
-            to="/register"
-            className="inline-block bg-primary text-white  font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-          >
-            Register Your Pet →
-          </Link>
-        </div>
       </section>
-      <section className="py-24 px-6 md:px-20 bg-white">
-        <h2 className="text-4xl font-bold text-center mb-16 ">
-          Why Choose Us?
-        </h2>
 
-        <div className="grid md:grid-cols-3 gap-12">
+      {/* Features */}
+      <section className="py-20 px-6 md:px-20 bg-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+          Why Pet Owners Love Us
+        </h2>
+        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {[
             {
-              icon: "/img/peticon.jpg",
-              title: "Instant Pet Info",
-              description:
-                "Anyone with a phone can tap the tag to view your pet's profile instantly.",
+              icon: "📱",
+              title: "Instant Info",
+              desc: "Anyone with a phone can tap and view your pet's profile instantly.",
             },
             {
-              icon: "/img/vet.jpeg",
-              title: "Find Nearby Vets",
-              description:
-                "Quickly locate nearby veterinary clinics in case of emergencies.",
+              icon: "🩺",
+              title: "Nearby Vets",
+              desc: "Locate veterinary clinics quickly in case of emergencies.",
             },
             {
-              icon: "/img/secure.jpg",
-              title: "Secure & Private",
-              description:
-                "Only share the info you choose. Your data stays protected and accessible only when needed.",
+              icon: "🔒",
+              title: "Privacy First",
+              desc: "You control the information you share. Your data stays protected.",
             },
-          ].map((feature, index) => (
+          ].map((f, i) => (
             <div
-              key={index}
-              className="relative p-8 rounded-2xl shadow-md border border-gray-100 bg-cover bg-center text-white hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-              style={{ backgroundImage: `url(${feature.icon})` }}
+              key={i}
+              className="p-8 rounded-2xl border border-gray-200 shadow-sm text-center hover:shadow-md transition"
             >
-              <div className="absolute inset-0 bg-black/50 rounded-2xl"></div>{" "}
-              {/* dark overlay for contrast */}
-              <div className="relative z-10">
-                <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                <p className="leading-relaxed">{feature.description}</p>
-              </div>
+              <div className="text-4xl mb-4">{f.icon}</div>
+              <h3 className="text-xl font-semibold mb-3">{f.title}</h3>
+              <p className="text-gray-600">{f.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className=" text-white py-20 text-center bg-gray-800">
-        <h2 className="text-4xl font-bold mb-6">Connect Your Pet Today</h2>
-        <p className="text-xl mb-8 max-w-2xl mx-auto">
-          Get started with our smart NFC tags and peace of mind.
+      {/* CTA */}
+      <section className="bg-primary text-white py-20 px-6 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          Share Your Pet’s Story in a Tap
+        </h2>
+        <p className="text-lg mb-8 text-gray-100">
+          Give your pet a digital identity — instantly share their details &
+          medical info.
         </p>
-        <br />
-        <br />
         <Link
           to="/shop"
-          className=" text-white bg-primary font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          className="bg-white text-primary font-semibold px-8 py-3 rounded-full shadow hover:bg-gray-100 transition"
         >
-          Shop NFC Tags →
+          Get Started →
         </Link>
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-16 px-6 md:px-20">
-        <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+      <footer className="bg-gray-900 text-gray-400 py-12 px-6 md:px-20">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
           <div>
-            <h4 className="text-2xl font-bold mb-6">PetCare</h4>
-            <p className="text-gray-400 leading-relaxed">
-              Smart solutions for pet safety and care.
-            </p>
+            <h4 className="text-xl font-bold text-white mb-4">PetCare</h4>
+            <p>Smart solutions for pet safety and care.</p>
           </div>
           <div>
-            <h4 className="text-2xl font-bold mb-6">Quick Links</h4>
-            <ul className="space-y-4">
-              {["About Us", "Contact", "FAQ"].map((item, index) => (
-                <li key={index}>
+            <h4 className="text-xl font-bold text-white mb-4">Quick Links</h4>
+            <ul className="space-y-3">
+              {["About Us", "Contact", "FAQ"].map((item, idx) => (
+                <li key={idx}>
                   <Link
                     to={`/${item.toLowerCase().replace(" ", "")}`}
-                    className="text-gray-400 hover:text-white transition-colors duration-200"
+                    className="hover:text-white transition"
                   >
                     {item}
                   </Link>
@@ -110,13 +112,13 @@ const Home = () => {
             </ul>
           </div>
           <div>
-            <h4 className="text-2xl font-bold mb-6">Contact Us</h4>
-            <p className="text-gray-400">support@petcare.com</p>
-            <p className="text-gray-400">1-800-PET-CARE</p>
+            <h4 className="text-xl font-bold text-white mb-4">Contact</h4>
+            <p>support@petcare.com</p>
+            <p>1-800-PET-CARE</p>
           </div>
         </div>
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} PetCare. All rights reserved.</p>
+        <div className="text-center border-t border-gray-700 mt-10 pt-6 text-sm">
+          &copy; {new Date().getFullYear()} PetCare. All rights reserved.
         </div>
       </footer>
     </div>
