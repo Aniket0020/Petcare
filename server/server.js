@@ -24,7 +24,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://petcard.netlify.app/"],
     credentials: true // Allow credentials (cookies, authorization headers)
 }));
 
@@ -71,7 +71,7 @@ mongoose.connect(process.env.DATABASE_URL)
     });
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
