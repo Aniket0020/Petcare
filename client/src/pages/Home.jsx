@@ -11,8 +11,7 @@ const Home = () => {
             Keep Your Pet <span className="text-primary">Safe</span> & Connected
           </h1>
           <p className="mt-6 text-lg text-gray-600">
-            With our NFC-enabled pet tags, your furry friend is always just a
-            tap away from being found.
+            Connecting Pet Lovers with Trusted Care
           </p>
           <div className="mt-8 flex flex-col md:flex-row gap-4 md:gap-6">
             <Link
