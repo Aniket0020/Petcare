@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const ProfileList = () => {
+     const URL = import.meta.env.VITE_API_URL;
     const [profiles, setProfiles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -12,10 +13,10 @@ const ProfileList = () => {
 
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get("http://localhost:3000/user/all", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+            const response = await axios.get(`${URL}/user/all`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             });
             setProfiles(response.data);
             console.log(response.data);

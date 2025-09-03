@@ -3,8 +3,10 @@ import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+  
 
 const Login = () => {
+ const URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -14,13 +16,10 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        `http://localhost:3000/${values.role}/login`,
-        {
-          email: values.email,
-          password: values.password,
-        }
-      );
+      const response = await axios.post(`${URL}/${values.role}/login`, {
+        email: values.email,
+        password: values.password,
+      });
 
       const token = response.data.token;
       if (!token) return navigate("/login");

@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CreatePet = () => {
-    const navigate = useNavigate(); //
+     const URL = import.meta.env.VITE_API_URL;
+    const navigate = useNavigate(); 
     const [pet, setPet] = useState({
         name: "",
         breed: "",
@@ -55,10 +56,10 @@ const CreatePet = () => {
                 return;
             }
 
-            const response = await axios.get("http://localhost:3000/pet", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+            const response = await axios.get(`${URL}/pet`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             });
 
             // If the user already has a pet, set hasPet to true
@@ -101,11 +102,11 @@ const CreatePet = () => {
             formData.append("owner.contactNumber", pet.owner.contactNumber);
             // if (pet.image) formData.append("image", pet.image); // Append image file
 
-            const response = await axios.post("http://localhost:3000/pet", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data", // Make sure to set the correct content type
-                    Authorization: `Bearer ${token}`,
-                },
+            const response = await axios.post(`${URL}/pet`, formData, {
+              headers: {
+                "Content-Type": "multipart/form-data", // Make sure to set the correct content type
+                Authorization: `Bearer ${token}`,
+              },
             });
 
             alert(response.data.message);

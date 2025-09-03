@@ -24,6 +24,7 @@ const getUserRole = () => {
 };
 
 const PetList = () => {
+     const URL = import.meta.env.VITE_API_URL;
     const [pets, setPets] = useState([]);
     const [filteredPets, setFilteredPets] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -43,10 +44,10 @@ const PetList = () => {
             const role = getUserRole();
             setUserRole(role);
 
-            const res = await axios.get("http://localhost:3000/pet", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+            const res = await axios.get( `${URL}/pet`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             });
 
             setPets(res.data);

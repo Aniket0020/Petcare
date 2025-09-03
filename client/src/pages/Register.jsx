@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 
 const Register = () => {
+const URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,7 +32,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:3000/${values.role}/register`,
+        `${URL}/${values.role}/register`,
         values
       );
       if (response.data.status) {

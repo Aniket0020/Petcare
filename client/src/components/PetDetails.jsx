@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import ActivateQR from "./ActivateQR";
 
 const PetDetails = () => {
+   const URL = import.meta.env.VITE_API_URL;
   const [isMedOpen, setIsMedOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState("template1");
@@ -43,7 +44,7 @@ const PetDetails = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.put(
-        `http://localhost:3000/pet/${petId}`,
+        `${URL}/pet/${petId}`,
         { ...updatedData },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -78,8 +79,8 @@ const PetDetails = () => {
   const fetchPet = async () => {
     try {
       const url = isPublicView
-        ? `http://localhost:3000/pet/public/${petId}`
-        : `http://localhost:3000/pet/${petId}`;
+        ? `${URL}/pet/public/${petId}`
+        : `${URL}/pet/${petId}`;
       const headers = isPublicView
         ? {}
         : { Authorization: `Bearer ${localStorage.getItem("token")}` };
@@ -136,7 +137,7 @@ const PetDetails = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.put(
-        `http://localhost:3000/pet/${petId}`,
+        `${URL}/pet/${petId}`,
         { ...updatedPet, template: selectedTemplate }, // added template here
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -178,7 +179,7 @@ const PetDetails = () => {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.delete(`http://localhost:3000/pet/${petId}`, {
+      await axios.delete(`${URL}/pet/${petId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

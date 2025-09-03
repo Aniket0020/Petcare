@@ -10,6 +10,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const PublicpetCard = () => {
+   const URL = import.meta.env.VITE_API_URL;
   const [qrModalVisible, setQrModalVisible] = useState(false);
   const [qrData, setQrData] = useState({ name: "", link: "", qrUrl: "" });
 
@@ -19,9 +20,7 @@ const PublicpetCard = () => {
   useEffect(() => {
     const fetchpet = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:3000/pet/public/${petId}`
-        );
+        const res = await axios.get(`${URL}/pet/public/${petId}`);
         setpet(res.data);
       } catch (error) {
         console.error("Error fetching pet:", error);
@@ -85,10 +84,7 @@ const PublicpetCard = () => {
               {/* QR Button */}
               <button
                 onClick={() =>
-                  toggleQRModal(
-                    pet.name,
-                    `https://localhost:3000/public/pet/${pet._id}`
-                  )
+                  toggleQRModal(pet.name, `${URL}/public/pet/${pet._id}`)
                 }
                 className="flex items-center gap-2 bg-yellow-200 hover:bg-amber-400 text-black  px-2 py-2 shadow-lg transition duration-200"
               >

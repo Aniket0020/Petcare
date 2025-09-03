@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
+   const URL = import.meta.env.VITE_API_URL;
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState("");
   const [activeSection, setActiveSection] = useState("view");
@@ -40,9 +41,7 @@ const Profile = () => {
         }
 
         const url =
-          role === "doctor"
-            ? "http://localhost:3000/doctor/profile"
-            : "http://localhost:3000/profile/get";
+          role === "doctor" ? `${URL}/doctor/profile` : `${URL}/profile/get`;
 
         const response = await axios.get(url, {
           headers: { Authorization: `Bearer ${token}` },
@@ -94,9 +93,9 @@ const Profile = () => {
       // Use correct update endpoint based on role
       let url = "";
       if (role === "doctor") {
-        url = "http://localhost:3000/doctor/update"; // Doctor profile update endpoint
+        url =   `${URL}/doctor/update`; // Doctor profile update endpoint
       } else {
-        url = "http://localhost:3000/profile/update"; // User profile update endpoint
+        url = `${URL}/profile/update`; // User profile update endpoint
       }
 
       const response = await axios.post(url, formDataToSend, {
