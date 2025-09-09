@@ -23,10 +23,14 @@ const Code = require('./model/code'); // Adjust the path as needed
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+
+
 app.use(cors({
-    origin: ["http://localhost:5173","https://petcard.netlify.app/" ],
-    credentials: true // Allow credentials (cookies, authorization headers)
+    origin: ["http://localhost:5173", "https://petcard.netlify.app"], // your frontend origins
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
 }));
+
 
 // Basic Route
 app.get('/', (req, res) => {
