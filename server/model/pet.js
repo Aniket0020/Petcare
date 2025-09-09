@@ -121,6 +121,6 @@ petSchema.virtual('age').get(function () {
         age--;
     }
     return age;
-}); 
+});
 
 module.exports = mongoose.model("Pet", petSchema);

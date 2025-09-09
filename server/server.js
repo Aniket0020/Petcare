@@ -12,8 +12,8 @@ const activateRoute = require('./routes/Activate');
 const app = express();
 
 
-
-const Code = require('./model/code'); 
+// Import your Code model
+const Code = require('./model/code'); // Adjust the path as needed
 
 
 
@@ -23,39 +23,17 @@ const Code = require('./model/code');
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Allowed origins
-const allowedOrigins = [
-    "http://localhost:5173",
-    "https://petcard.netlify.app"
-];
-
-// CORS middleware
 app.use(cors({
-    origin: function (origin, callback) {
-        // allow requests with no origin (like Postman)
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            const msg = `The CORS policy for this site does not allow access from the specified Origin.`;
-            return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-    },
-    credentials: true, // allow cookies, authorization headers
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // include OPTIONS
+    origin: ["http://localhost:5173","https://petcard.netlify.app/" ],
+    credentials: true // Allow credentials (cookies, authorization headers)
 }));
 
-// Make sure OPTIONS requests are handled
-app.options("*", cors({
-    origin: allowedOrigins,
-    credentials: true,
-}));
-
-
+// Basic Route
 app.get('/', (req, res) => {
     res.send("Server OK!");
 });
 
-
+// Routes setup
 
 app.use('/user', userRoute);
 app.use("/profile", profileRoute);
@@ -63,7 +41,7 @@ app.use("/pet", petRoute);
 app.use("/doctor", doctorRoutes);
 app.use('/QR', activateRoute);
 
-
+// Add this after other app.use() and before app.listen()
 app.get('/qr/:code', async (req, res) => {
     try {
         const resCode = await Code.findOne();
@@ -73,7 +51,7 @@ app.get('/qr/:code', async (req, res) => {
             return res.status(404).send("QR code not found or not activated yet.");
         }
 
-        // Redirect to stored destination URL
+        // Redirect to the stored destination URL
         res.redirect(qr.url);
         
 
@@ -84,16 +62,16 @@ app.get('/qr/:code', async (req, res) => {
 });
 
 
-
+// MongoDB connection
 mongoose.connect(process.env.DATABASE_URL)
     .then(() => console.log("DB connected"))
     .catch((err) => {
         console.error("Failed to connect to MongoDB server", err);
-        process.exit(1); 
+        process.exit(1); // Exit if DB connection fails
     });
 
-
-const PORT = 3000;
+// Set port dynamically from .env or default to 3000
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
