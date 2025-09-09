@@ -46,24 +46,24 @@ app.use("/doctor", doctorRoutes);
 app.use('/QR', activateRoute);
 
 // Add this after other app.use() and before app.listen()
-app.get('/qr/:code', async (req, res) => {
-    try {
-        const resCode = await Code.findOne();
-        const qr = resCode.code;
+// app.get('/qr/:code', async (req, res) => {
+//     try {
+//         const resCode = await Code.findOne();
+//         const qr = resCode.code;
 
-        if (!qr || !qr.url) {
-            return res.status(404).send("QR code not found or not activated yet.");
-        }
+//         if (!qr || !qr.url) {
+//             return res.status(404).send("QR code not found or not activated yet.");
+//         }
 
-        // Redirect to the stored destination URL
-        res.redirect(qr.url);
+//         // Redirect to the stored destination URL
+//         res.redirect(qr.url);
         
 
-    } catch (err) {
-        console.error("QR redirect error:", err);
-        res.status(500).send("Internal Server Error");
-    }
-});
+//     } catch (err) {
+//         console.error("QR redirect error:", err);
+//         res.status(500).send("Internal Server Error");
+//     }
+// });
 
 
 // MongoDB connection
