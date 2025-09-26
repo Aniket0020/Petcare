@@ -14,6 +14,10 @@ import CreatePet from "./components/CreatePet";
 import ProfileList from "./components/ProfileList";
 import PublicPetCard from "./components/PublicPetCard";
 
+// ✅ New pages
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+
 function App() {
   return (
     <Router>
@@ -22,11 +26,17 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register/:code" element={<Register />} />
+          <Route path="*" element={<Register />} /> {/* fallback */}
+          {/* Password Reset */}
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="/reset-password/:id/:token"
+            element={<ResetPassword />}
+          />
         </Route>
 
         {/* Private Routes */}
-
         <Route
           element={
             <PrivateRoute>
