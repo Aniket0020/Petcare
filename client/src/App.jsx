@@ -13,10 +13,12 @@ import PetDetails from "./components/PetDetails";
 import CreatePet from "./components/CreatePet";
 import ProfileList from "./components/ProfileList";
 import PublicPetCard from "./components/PublicPetCard";
+import AdminLogin from "./admin/adminLogin";
 
 // ✅ New pages
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import AdminDashboard from "./admin/AdminDashboard";
 
 function App() {
   return (
@@ -27,7 +29,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register/:code" element={<Register />} />
-          <Route path="*" element={<Register />} /> {/* fallback */}
+
           {/* Password Reset */}
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route
@@ -35,7 +37,6 @@ function App() {
             element={<ResetPassword />}
           />
         </Route>
-
         {/* Private Routes */}
         <Route
           element={
@@ -51,10 +52,11 @@ function App() {
           <Route path="/petlist" element={<PetList />} />
           <Route path="/pets/:petId" element={<PetDetails />} />
         </Route>
-
         {/* Catch-all for 404 */}
-        <Route path="*" element={<div>Page not found</div>} />
-        <Route path="/public/pet/:petId" element={<PublicPetCard />} />
+        <Route path="*" element={<Register />} /> {/* fallback */}
+        <Route path="/pet/:petId" element={<PublicPetCard />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </Router>
   );

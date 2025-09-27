@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import ActivateQR from "./ActivateQR";
 
 const PetDetails = () => {
-   const URL = import.meta.env.VITE_API_URL;
+  const URL = import.meta.env.VITE_API_URL;
   const [isMedOpen, setIsMedOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState("template1");
@@ -99,6 +99,9 @@ const PetDetails = () => {
         owner: res.data.owner,
         image: res.data.image || "",
       });
+      if (res.data.template) {
+        setSelectedTemplate(res.data.template);
+      }
     } catch (error) {
       console.error("Error fetching pet:", error);
       alert("Could not fetch pet data");

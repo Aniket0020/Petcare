@@ -19,7 +19,7 @@ const ActivateQR = () => {
     setMessage("");
 
     try {
-      const res = await axios.post("http://localhost:3000/QR/activate", {
+      const res = await axios.post("http://localhost:3000/qr/activate", {
         code,
         petId,
       });
