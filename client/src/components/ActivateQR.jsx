@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const ActivateQR = () => {
+  const URL = import.meta.env.VITE_API_URL;
   const [code, setCode] = useState("");
   const [petId, setPetId] = useState("");
   const [message, setMessage] = useState("");
@@ -19,7 +20,7 @@ const ActivateQR = () => {
     setMessage("");
 
     try {
-      const res = await axios.post("http://localhost:3000/qr/activate", {
+      const res = await axios.post(`${URL}/qr/activate`, {
         code,
         petId,
       });
