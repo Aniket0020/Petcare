@@ -7,7 +7,13 @@ const userRoute = require('./routes/userRoutes');
 const profileRoute = require("./routes/ProfileRoutes");
 const petRoute = require("./routes/petRoutes");
 const doctorRoutes = require("./routes/doctorAuth");
-const activateRoute = require('./routes/Activate');
+const adminRoutes = require("./routes/adminRoutes")
+const adminQR = require("./routes/adminQR")
+const qrRoute = require("./routes/qrRedirect")
+const QR = require("./model/qr")
+
+
+
 
 const app = express();
 
@@ -31,10 +37,35 @@ app.use(cors({
     credentials: true
 }));
 
+app.use((req, res, next) => {
+    console.log("Incoming request:", req.method, req.url);
+    next();
+});
+
+
 
 // Basic Route
 app.get('/', (req, res) => {
     res.send("Server OK!");
+});
+
+app.post("/code", async (req, res) => {
+
+})
+
+app.post("/QR/activate", async (req, res) => {
+    const { code, petId } = req.body;
+
+    const qr = await QR.findOne({ code });
+    if (!qr) return res.status(404).json({ message: "Invalid code" });
+    if (qr.isActivated) return res.status(400).json({ message: "Already activated" });
+
+    qr.petId = petId;
+    qr.redirectUrl = `${process.env.FRONTEND_URL}/pet/${petId}`;
+    qr.isActivated = true;
+    await qr.save();
+
+    res.json({ message: "QR activated", redirectUrl: qr.redirectUrl });
 });
 
 // Routes setup
@@ -43,27 +74,10 @@ app.use('/user', userRoute);
 app.use("/profile", profileRoute);
 app.use("/pet", petRoute);
 app.use("/doctor", doctorRoutes);
-app.use('/QR', activateRoute);
+app.use("/admin", adminRoutes)
+app.use("/adminqr", adminQR)
+app.use("/qr", qrRoute)
 
-// Add this after other app.use() and before app.listen()
-// app.get('/qr/:code', async (req, res) => {
-//     try {
-//         const resCode = await Code.findOne();
-//         const qr = resCode.code;
-
-//         if (!qr || !qr.url) {
-//             return res.status(404).send("QR code not found or not activated yet.");
-//         }
-
-//         // Redirect to the stored destination URL
-//         res.redirect(qr.url);
-        
-
-//     } catch (err) {
-//         console.error("QR redirect error:", err);
-//         res.status(500).send("Internal Server Error");
-//     }
-// });
 
 
 // MongoDB connection
