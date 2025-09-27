@@ -27,7 +27,7 @@ const AdminDashboard = () => {
     if (!token) return;
     try {
       const res = await axios.post(
-        `${URL}//adminqr/generate/${count}`,
+        `${URL}/adminqr/generate/${count}`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
