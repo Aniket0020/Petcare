@@ -13,7 +13,7 @@ import PetDetails from "./components/PetDetails";
 import CreatePet from "./components/CreatePet";
 import ProfileList from "./components/ProfileList";
 import PublicPetCard from "./components/PublicPetCard";
-import AdminLogin from "./admin/adminLogin";
+import AdminLogin from "./admin/AdminLogin";
 
 // ✅ New pages
 import ForgotPassword from "./pages/ForgotPassword";
