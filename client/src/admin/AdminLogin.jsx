@@ -3,13 +3,14 @@ import axios from "axios";
 import { toast } from "react-toastify"; // make sure you installed react-hot-toast
 
 const AdminLogin = () => {
+    const URL = import.meta.env.VITE_API_URL;
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault(); // prevent page reload
     try {
-      const res = await axios.post("http://localhost:3000/admin/login", {
+      const res = await axios.post(`${URL}/admin/login`, {
         name,
         password,
       });

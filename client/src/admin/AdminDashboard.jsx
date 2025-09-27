@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const AdminDashboard = () => {
+  const URL = import.meta.env.VITE_API_URL;
   const [qrList, setQrList] = useState([]);
   const [count, setCount] = useState(1); // Number of QR codes to generate
   const token = localStorage.getItem("token");
@@ -11,7 +12,7 @@ const AdminDashboard = () => {
   const fetchQRs = async () => {
     if (!token) return;
     try {
-      const res = await axios.get("http://localhost:3000/adminqr/list", {
+      const res = await axios.get(`${URL}/adminqr/list`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setQrList(res.data);
@@ -26,7 +27,7 @@ const AdminDashboard = () => {
     if (!token) return;
     try {
       const res = await axios.post(
-        `http://localhost:3000/adminqr/generate/${count}`,
+        `${URL}//adminqr/generate/${count}`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
