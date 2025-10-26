@@ -10,7 +10,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const PublicpetCard = () => {
-   const URL = import.meta.env.VITE_API_URL;
+  const URL = import.meta.env.VITE_API_URL;
   const [qrModalVisible, setQrModalVisible] = useState(false);
   const [qrData, setQrData] = useState({ name: "", link: "", qrUrl: "" });
 
@@ -43,7 +43,7 @@ const PublicpetCard = () => {
   if (!pet) return <div>Loading...</div>;
 
   const handleShareLink = () => {
-    const publicLink = `${window.location.origin}/public/pet/${petId}`;
+    const publicLink = `${window.location.origin}/pet/${petId}`;
     navigator.clipboard.writeText(publicLink);
     toast.success("Link copied! You can now share your pet’s profile.");
   };
@@ -58,45 +58,51 @@ const PublicpetCard = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow-md border border-gray-300">
+    <div className="p-2">
       {pet.template === "template1" && (
-        <div className="bg-gradient-to-br from-amber-400 via-amber-300 to-yellow-200 rounded-3xl shadow-2xl border border-gray-300 overflow-hidden max-w-xl mx-auto">
+        <div
+          className=" rounded-2xl shadow-2xl border border-gray-300 overflow-hidden max-w-xl mx-auto p-6 "
+          style={{ backgroundImage: "url('/img/bg.jpeg')" }}
+        >
           {/* Header Section with Image */}
-          <div className="bg-amber-50 p-8 flex flex-col items-center relative">
-            {pet.image ? (
-              <img
-                src={pet.image}
-                alt="pet"
-                className="w-32 h-32 object-cover rounded-full border-8 border-white shadow-xl transition-transform duration-300 hover:scale-105"
-              />
-            ) : (
-              <div className="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 text-xl font-semibold">
-                No Image
+          <div className="bg-white p-8 rounded-2xl shadow-md flex justify-between gap-5">
+            <div className="flex flex-col justify-between w-full">
+              {pet.image ? (
+                <img
+                  src={pet.image}
+                  alt="Pet"
+                  className="w-full h-40 object-cover rounded-full border-8 border-white shadow-xl transition-transform duration-300 hover:scale-105"
+                />
+              ) : (
+                <div className="w-32 h-32 bg-gray-200 rounded-full  text-gray-400 text-xl font-semibold">
+                  Add Image
+                </div>
+              )}
+              <div className="pl-4">
+                <h2 className="first-letter:font-style first-letter:text-6xl mt-5 text-4xl font-extrabold text-amber-900 drop-shadow-md">
+                  {pet.name}
+                </h2>
+                <p className="mt-2 text-lg text-amber-700 italic tracking-wide ">
+                  {pet.breed}
+                </p>
               </div>
-            )}
-            <h2 className="mt-5 text-3xl font-extrabold text-amber-900 drop-shadow-md">
-              {pet.name}
-            </h2>
-            <p className="text-lg text-amber-700 italic tracking-wide">
-              {pet.breed}
-            </p>
-            <div className="flex justify-center gap-6 mt-6 absolute bottom-5 right-0">
+            </div>
+
+            <div className="flex flex-col justify-center gap-6  ">
               {/* QR Button */}
               <button
-                onClick={() =>
-                  toggleQRModal(pet.name, `${URL}/public/pet/${pet._id}`)
-                }
-                className="flex items-center gap-2 bg-yellow-200 hover:bg-amber-400 text-black  px-2 py-2 shadow-lg transition duration-200"
+                onClick={() => toggleQRModal(pet.name, `${URL}/pet/${pet._id}`)}
+                className="flex items-center gap-2 bg-yellow-300 hover:bg-amber-500 text-black  px-8 py-8 shadow-lg transition duration-200 rounded-2xl"
               >
-                <QrCodeIcon style={{ fontSize: "20px" }} />
+                <QrCodeIcon style={{ fontSize: "40px" }} />
               </button>
 
               {/* Share Button */}
               <button
                 onClick={handleShareLink}
-                className="flex items-center gap-2 bg-yellow-200 hover:bg-amber-400 text-black px-2 py-2  shadow-lg transition duration-200"
+                className="flex items-center gap-2 bg-[#3c625d] hover:bg-[#16433f] text-black px-8 py-8  shadow-lg transition duration-200 rounded-2xl"
               >
-                <ShareIcon style={{ fontSize: "20px" }} />
+                <ShareIcon style={{ fontSize: "40px" }} />
               </button>
 
               {/* Toast Notification Container */}
@@ -116,8 +122,8 @@ const PublicpetCard = () => {
           </div>
 
           {/* About Section */}
-          <section className="bg-white mx-auto w-[85%] p-8 rounded-2xl mt-8 shadow-md">
-            <h3 className="text-center mb-4 text-3xl font-semibold text-amber-800 border-b-2 border-amber-300 pb-2">
+          <section className="bg-white p-8 rounded-2xl mt-8 shadow-md">
+            <h3 className="text-center  mb-4 text-3xl font-semibold text-amber-800 border-b-2 border-amber-300 pb-2">
               About
             </h3>
             <p className="text-gray-700 leading-relaxed tracking-wide">
@@ -126,7 +132,7 @@ const PublicpetCard = () => {
           </section>
 
           {/* Info Section */}
-          <section className="my-8 space-y-8 mx-auto w-[85%] rounded-2xl bg-white p-6 shadow-lg text-gray-700">
+          <section className="mt-8 space-y-8  rounded-2xl bg-white p-6 shadow-lg text-gray-700">
             {/* Gallery Placeholder */}
             {/* You can insert a carousel/gallery component here */}
 
@@ -147,7 +153,7 @@ const PublicpetCard = () => {
               </p>
             </div>
 
-            {/* pet Details Grid */}
+            {/* Pet Details Grid */}
             <div className="grid grid-cols-2 gap-6 bg-amber-50 p-6 rounded-xl shadow-inner">
               <div>
                 <p className="font-semibold text-amber-700">Gender</p>
@@ -165,9 +171,10 @@ const PublicpetCard = () => {
                 <p className="font-semibold text-amber-700">DOB</p>
                 <p>{formatDate(pet.DOB)}</p>
               </div>
+
               <div>
                 <p className="font-semibold text-amber-700">Age</p>
-                <p>{formatDate(pet.age)}</p>
+                <p>{pet.age} yrs</p>
               </div>
               <div>
                 <p className="font-semibold text-amber-700">Vaccinated</p>

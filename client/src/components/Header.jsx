@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="bg-white text-gray-800 shadow-sm border-b border-gray-200 sticky top-0 z-1000">
+    <header className="bg-gradient-to-br from-blue-50 to-indigo-50 text-gray-800 shadow-sm border-b border-gray-200 sticky top-0 z-1000">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         <h1 className="text-2xl font-semibold tracking-tight font-dance ">
           Pet Care

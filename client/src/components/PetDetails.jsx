@@ -6,6 +6,9 @@ import axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ActivateQR from "./ActivateQR";
+import Button from "@mui/material/Button";
+import ShareIcon from "@mui/icons-material/Share";
+import QrCodeIcon from "@mui/icons-material/QrCode";
 
 const PetDetails = () => {
   const URL = import.meta.env.VITE_API_URL;
@@ -155,7 +158,7 @@ const PetDetails = () => {
   };
 
   const handleShareLink = () => {
-    const publicLink = `${window.location.origin}/public/pet/${petId}`;
+    const publicLink = `${window.location.origin}/pet/${petId}`;
     navigator.clipboard.writeText(publicLink);
     toast.success("Link copied! You can now share your pet’s profile.");
   };
@@ -255,7 +258,7 @@ const PetDetails = () => {
                 { label: "Name", key: "name" },
                 { label: "Breed", key: "breed" },
                 { label: "Date of Birth", key: "DOB", type: "date" },
-                { label: "Gender", key: "gender" },
+
                 { label: "Weight (kg)", key: "weight", type: "number" },
                 { label: "Color", key: "color" },
               ].map(({ label, key, type = "text" }) => (
@@ -273,6 +276,20 @@ const PetDetails = () => {
                 </div>
               ))}
 
+              <div>
+                <label className="text-sm text-gray-600">Gender</label>
+                <select
+                  name="gender"
+                  value={updatedPet.gender}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 block w-full border px-3 py-2 rounded-md shadow-sm focus:ring focus:ring-blue-200"
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
               <div>
                 <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
                   <input
@@ -475,12 +492,19 @@ const PetDetails = () => {
 
         {/* Live Preview Section */}
         <div className="md:w-1/2 bg-gradient-to-br from-white to-blue-50 p-6 rounded-xl shadow-md border border-blue-200">
-          <h2 className="text-xl font-bold text-blue-800 mb-4">Live Preview</h2>
-
+          <h2 className="text-2xl font-bold text-blue-800 mb-2">
+            Live Preview
+          </h2>
+          <div className="font-medium text-xl mb-5 ">
+            <spam className=" font-bold">Pet Id:</spam> <i>{petId}</i>
+          </div>
           {selectedTemplate === "template1" && (
-            <div className="bg-gradient-to-br from-amber-400 via-amber-300 to-yellow-200 rounded-3xl shadow-2xl border border-gray-300 overflow-hidden max-w-xl mx-auto">
+            <div
+              className=" rounded-2xl shadow-2xl border border-gray-300 overflow-hidden max-w-xl mx-auto p-6"
+              style={{ backgroundImage: "url('/img/bg.jpeg')" }}
+            >
               {/* Header Section with Image */}
-              <div className="bg-amber-50 p-8 flex flex-col items-center relative">
+              <div className="bg-white  p-8 rounded-2xl  shadow-md relative">
                 {updatedPet.image ? (
                   <img
                     src={updatedPet.image}
@@ -495,13 +519,46 @@ const PetDetails = () => {
                 <h2 className="mt-5 text-3xl font-extrabold text-amber-900 drop-shadow-md">
                   {updatedPet.name}
                 </h2>
-                <p className="text-lg text-amber-700 italic tracking-wide">
+                <p className="mt-2 text-lg text-amber-700 italic tracking-wide">
                   {updatedPet.breed}
                 </p>
+                <div className="flex flex-col justify-center gap-6  absolute bottom-2 right-5">
+                  {/* QR Button */}
+                  <button
+                    onClick={() =>
+                      toggleQRModal(pet.name, `${URL}/pet/${pet._id}`)
+                    }
+                    className="flex items-center gap-2 bg-yellow-300 hover:bg-amber-500 text-black  px-8 py-8 shadow-lg transition duration-200 rounded-2xl"
+                  >
+                    <QrCodeIcon style={{ fontSize: "40px" }} />
+                  </button>
+
+                  {/* Share Button */}
+                  <button
+                    onClick={handleShareLink}
+                    className="flex items-center gap-2 bg-[#3c625d] hover:bg-[#16433f] text-black px-8 py-8  shadow-lg transition duration-200 rounded-2xl"
+                  >
+                    <ShareIcon style={{ fontSize: "40px" }} />
+                  </button>
+
+                  {/* Toast Notification Container */}
+                  <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="dark"
+                  />
+                </div>
               </div>
 
               {/* About Section */}
-              <section className="bg-white mx-auto w-[85%] p-8 rounded-2xl mt-8 shadow-md">
+              <section className="bg-white p-8 rounded-2xl mt-8 shadow-md">
                 <h3 className="text-center mb-4 text-3xl font-semibold text-amber-800 border-b-2 border-amber-300 pb-2">
                   About
                 </h3>
@@ -511,7 +568,7 @@ const PetDetails = () => {
               </section>
 
               {/* Info Section */}
-              <section className="my-8 space-y-8 mx-auto w-[85%] rounded-2xl bg-white p-6 shadow-lg text-gray-700">
+              <section className="mt-8 space-y-8  rounded-2xl bg-white p-6 shadow-lg text-gray-700">
                 {/* Gallery Placeholder */}
                 {/* You can insert a carousel/gallery component here */}
 
@@ -559,7 +616,7 @@ const PetDetails = () => {
 
                   <div>
                     <p className="font-semibold text-amber-700">Age</p>
-                    <p>{pet.age} yrs</p>
+                    <p>{pet.age} </p>
                   </div>
                   <div>
                     <p className="font-semibold text-amber-700">Vaccinated</p>
@@ -647,7 +704,7 @@ const PetDetails = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-cyan-300">Age</p>
-                      <p>{pet.age} yrs</p>
+                      <p>{pet.age} </p>
                     </div>
                     <div className="col-span-2">
                       <p className="font-semibold text-cyan-300">Vaccinated</p>
@@ -736,7 +793,7 @@ const PetDetails = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-purple-400">Age</p>
-                      <p>{pet.age} yrs</p>
+                      <p>{pet.age} </p>
                     </div>
                     <div className="col-span-2">
                       <p className="font-semibold text-purple-400">

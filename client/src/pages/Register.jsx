@@ -48,18 +48,21 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-2 bg-gradient-to-br from-blue-50 to-indigo-50 ">
-      <div className="w-full max-w-5xl flex flex-col md:flex-row justify-between shadow-2xl rounded-3xl md:rounded-3xl">
-        <div className="md:w-[60%] w-full relative ">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <div className="w-full max-w-5xl flex flex-col md:flex-row shadow-2xl rounded-3xl overflow-hidden">
+        {/* Image Section */}
+        <div className="md:w-[60%] w-full relative">
           <img
-            className="w-full h-64 md:h-full object-cover  rounded-l-3xl md:rounded-l-3xl"
+            className="w-full h-48 md:h-full object-cover"
             src="/img/reg2.jpg"
             alt="Pet NFC Tag"
           />
         </div>
-        <div className="bg-white/80 backdrop-blur-md border border-gray-200  p-7  w-full max-w-md mx-auto  rounded-r-3xl md:rounded-r-3xl">
-          <h2 className="text-3xl font-bold text-center  mb-5 tracking-tight">
-            Create Account 🐶
+
+        {/* Form Section */}
+        <div className="bg-white/80 backdrop-blur-md border border-gray-200 p-6 sm:p-8 w-full md:w-[40%] flex flex-col justify-center">
+          <h2 className="text-3xl font-bold text-center mb-6 tracking-tight">
+            Create Account
           </h2>
 
           <Formik
@@ -69,7 +72,8 @@ const Register = () => {
           >
             {({ isSubmitting }) => (
               <Form>
-                <div className="mb-6">
+                {/* Username */}
+                <div className="mb-5">
                   <label
                     htmlFor="name"
                     className="block text-sm font-medium text-gray-700 mb-1"
@@ -89,7 +93,8 @@ const Register = () => {
                   />
                 </div>
 
-                <div className="mb-6">
+                {/* Email */}
+                <div className="mb-5">
                   <label
                     htmlFor="email"
                     className="block text-sm font-medium text-gray-700 mb-1"
@@ -109,7 +114,8 @@ const Register = () => {
                   />
                 </div>
 
-                <div className="mb-6">
+                {/* Password */}
+                <div className="mb-5">
                   <label
                     htmlFor="password"
                     className="block text-sm font-medium text-gray-700 mb-1"
@@ -129,7 +135,8 @@ const Register = () => {
                   />
                 </div>
 
-                <div className="mb-6">
+                {/* Role */}
+                <div className="mb-5">
                   <label
                     htmlFor="role"
                     className="block text-sm font-medium text-gray-700 mb-1"
@@ -151,15 +158,17 @@ const Register = () => {
                   />
                 </div>
 
+                {/* Error Message */}
                 {error && (
                   <p className="text-red-500 text-center mb-4">{error}</p>
                 )}
 
+                {/* Submit */}
                 <button
                   type="submit"
                   disabled={isSubmitting || loading}
                   className={`w-full text-white py-3 rounded-xl transition duration-300 font-semibold shadow-md ${
-                    loading ? "bg-primary/80" : "bg-primary"
+                    loading ? "bg-indigo-600/80" : "bg-indigo-600"
                   }`}
                 >
                   {loading ? "Registering..." : "Register"}
@@ -168,11 +177,12 @@ const Register = () => {
             )}
           </Formik>
 
+          {/* Login Link */}
           <p className="text-center text-sm text-gray-600 mt-6">
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-primary hover:underline font-medium"
+              className="text-indigo-600 hover:underline font-medium"
             >
               Login
             </Link>

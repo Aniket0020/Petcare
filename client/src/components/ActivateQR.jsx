@@ -49,7 +49,7 @@ const ActivateQR = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 border rounded-md shadow">
+    <div className="w-3/4  mt-10 p-6 border rounded-md shadow">
       <h2 className="text-xl font-bold mb-4 text-center">Activate Pet Tag</h2>
 
       <form onSubmit={handleActivate} className="flex flex-col gap-3">
@@ -73,7 +73,9 @@ const ActivateQR = () => {
           type="submit"
           disabled={loading}
           className={`w-full py-2 rounded text-white ${
-            loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+            loading
+              ? "bg-gray-400"
+              : "bg-indigo-600 hover:bg-indigo-700 "
           }`}
         >
           {loading ? "Activating..." : "Activate QR"}

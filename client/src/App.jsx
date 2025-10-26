@@ -19,6 +19,8 @@ import AdminLogin from "./admin/AdminLogin";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import AdminDashboard from "./admin/AdminDashboard";
+import FAQ from "./components/FAQ";
+import AdminQR from "./admin/AdminQR";
 
 function App() {
   return (
@@ -29,13 +31,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register/:code" element={<Register />} />
-
+          <Route path="*" element={<Register />} /> {/* fallback */}
           {/* Password Reset */}
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route
-            path="/reset-password/:id/:token"
-            element={<ResetPassword />}
-          />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/FAQ" element={<FAQ />} />
         </Route>
         {/* Private Routes */}
         <Route
@@ -52,11 +52,13 @@ function App() {
           <Route path="/petlist" element={<PetList />} />
           <Route path="/pets/:petId" element={<PetDetails />} />
         </Route>
+
         {/* Catch-all for 404 */}
-        <Route path="*" element={<Register />} /> {/* fallback */}
+
         <Route path="/pet/:petId" element={<PublicPetCard />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/qr" element={<AdminQR />} />
       </Routes>
     </Router>
   );

@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "title": "Upgrade to Tap Savvy Premium",
+        "image": "/ads/premium-banner.jpg",
+        "link": "https://tapsavvy.com/premium",
+        "description": "Grow your business with advanced analytics and smart QR technology!"
+    },
+    {
+        "id": 2,
+        "title": "Pet Insurance Offer",
+        "image": "/ads/pet-insurance.jpg",
+        "link": "https://petcare.com/insurance",
+        "description": "Secure your pet’s future with 40% off on premium insurance plans."
+    },
+    {
+        "id": 3,
+        "title": "Get a Custom QR Tag",
+        "image": "/ads/qr-tag.jpg",
+        "link": "https://tapsavvy.com/shop",
+        "description": "Design your own stylish QR tag — fast delivery and durable quality!"
+    }
+]

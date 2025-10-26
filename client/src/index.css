@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import "tailwindcss";
 
 @theme {
     --color-primary: #093FB4;
+    --font-style: 'Arvo', 'sans-serif'
+}
 
+
+body {
+    font-family: var(--font-style);
 }
