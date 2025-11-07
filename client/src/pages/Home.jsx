@@ -84,7 +84,7 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-primary text-white py-20 px-6 text-center">
+      <section className="bg-indigo-600 text-white py-20 px-6 text-center">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
           Share Your Pet’s Story in a Tap
         </h2>

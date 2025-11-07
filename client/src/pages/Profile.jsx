@@ -170,7 +170,7 @@ const Profile = () => {
 
         {/* Profile View */}
         {activeSection === "view" && (
-          <div className="w-full">
+          <div className="max-w-lg mx-auto">
             <div className="relative bg-gradient-to-br from-purple-50 via-white to-indigo-50 rounded-3xl shadow-2xl overflow-hidden border border-purple-100">
               {/* Header with gradient background */}
               <div className="bg-gradient-to-r from-purple-600 to-indigo-600 px-8 py-6 text-white relative">
@@ -199,7 +199,7 @@ const Profile = () => {
 
                 {/* Profile Information */}
                 <div className="space-y-4 flex ">
-                  <div className="w-1/2">
+                  <div className="w-full">
                     {/* Name and Phone Row */}
                     <div className="grid grid-cols-1 gap-4">
                       <div className="bg-white rounded-2xl p-2 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200 align-middle">
@@ -235,7 +235,7 @@ const Profile = () => {
                       </div>
                     </div>
                     {/* Address */}
-                    <div className="bg-white rounded-2xl p-2 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+                    <div className="mt-4 bg-white rounded-2xl p-2 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
                       <div className="flex items-start gap-3">
                         <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mt-1">
                           <Building className="w-5 h-5 text-blue-600" />
@@ -251,7 +251,7 @@ const Profile = () => {
                       </div>
                     </div>
                     {/* City and State Row */}
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-4 mt-4">
                       <div className="bg-white rounded-2xl p-2 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
@@ -313,18 +313,18 @@ const Profile = () => {
               <div className="px-10 py-6 mb-2">
                 <form onSubmit={handleUpdate} className="space-y-4">
                   {/* Profile Image Upload */}
-                  <div className="flex justify-center -mt-14 mb-6 relative z-10">
+                  <div className="flex -mt-14 mb-6 relative z-10">
                     {imagePreview ? (
                       <img
                         src={imagePreview}
                         alt="Preview"
-                        className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
+                        className="w-60 h-30 rounded-full object-cover border-4 border-white shadow-lg"
                       />
                     ) : profile.image ? (
                       <img
                         src={`data:image/jpeg;base64,${profile.image}`}
                         alt="Profile"
-                        className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
+                        className="w-60 h-30 rounded-full object-cover border-4 border-white shadow-lg"
                       />
                     ) : (
                       <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-400 to-indigo-500 border-4 border-white shadow-lg flex items-center justify-center">

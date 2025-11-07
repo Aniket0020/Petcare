@@ -163,6 +163,15 @@ const PetDetails = () => {
     toast.success("Link copied! You can now share your pet’s profile.");
   };
 
+  const toggleQRModal = (name, link) => {
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
+      link
+    )}&size=200x200`;
+
+    setQrData({ name, link, qrUrl });
+    setQrModalVisible(!qrModalVisible); // toggle visibility
+  };
+
   if (!pet)
     return <div className="text-center mt-10 text-blue-700">Loading...</div>;
 
@@ -244,10 +253,10 @@ const PetDetails = () => {
                 className="border border-blue-300 rounded-md px-3 py-1 focus:ring-2 focus:ring-blue-200"
               >
                 <option value="template1">Classic Card</option>
-                <option value="template2">Modern Minimal</option>
+                {/* <option value="template2">Modern Minimal</option>
                 <option value="template3">Bold Highlight</option>
                 <option value="template4">4</option>
-                <option value="template5">5</option>
+                <option value="template5">5</option> */}
               </select>
             </div>
 
@@ -500,48 +509,53 @@ const PetDetails = () => {
           </div>
           {selectedTemplate === "template1" && (
             <div
-              className=" rounded-2xl shadow-2xl border border-gray-300 overflow-hidden max-w-xl mx-auto p-6"
+              className="rounded-2xl shadow-2xl border border-gray-300 overflow-hidden max-w-6xl mx-auto p-4 sm:p-6 md:p-10 bg-cover bg-center"
               style={{ backgroundImage: "url('/img/bg.jpeg')" }}
             >
-              {/* Header Section with Image */}
-              <div className="bg-white  p-8 rounded-2xl  shadow-md relative">
-                {updatedPet.image ? (
-                  <img
-                    src={updatedPet.image}
-                    alt="Pet"
-                    className="w-32 h-32 object-cover rounded-full border-8 border-white shadow-xl transition-transform duration-300 hover:scale-105"
-                  />
-                ) : (
-                  <div className="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 text-xl font-semibold">
-                    Add Image
+              {/* Header Section */}
+              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-md flex flex-col md:flex-row justify-around gap-6 md:gap-10">
+                {/* Left Side - Pet Info */}
+                <div className="flex flex-col items-center md:items-start w-full md:w-2/3">
+                  {updatedPet.image ? (
+                    <img
+                      src={updatedPet.image}
+                      alt="Pet"
+                      className="w-60 h-40 sm:w-100 sm:h-48 md:w-120 md:h-56 object-cover rounded-full border-8 border-white shadow-xl transition-transform duration-300 hover:scale-105"
+                    />
+                  ) : (
+                    <div className="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 text-lg font-semibold">
+                      Add Image
+                    </div>
+                  )}
+
+                  <div className="text-center md:text-left mt-5">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-amber-900 drop-shadow-md">
+                      {updatedPet.name}
+                    </h2>
+                    <p className="mt-2 text-lg text-amber-700 italic tracking-wide">
+                      {updatedPet.breed}
+                    </p>
                   </div>
-                )}
-                <h2 className="mt-5 text-3xl font-extrabold text-amber-900 drop-shadow-md">
-                  {updatedPet.name}
-                </h2>
-                <p className="mt-2 text-lg text-amber-700 italic tracking-wide">
-                  {updatedPet.breed}
-                </p>
-                <div className="flex flex-col justify-center gap-6  absolute bottom-2 right-5">
-                  {/* QR Button */}
+                </div>
+
+                {/* Right Side - Buttons */}
+                <div className="flex justify-center sm:flex-col md:flex-col items-center gap-4 md:gap-6">
                   <button
                     onClick={() =>
-                      toggleQRModal(pet.name, `${URL}/pet/${pet._id}`)
+                      toggleQRModal(updatedPet.name, `${URL}/pet/${pet._id}`)
                     }
-                    className="flex items-center gap-2 bg-yellow-300 hover:bg-amber-500 text-black  px-8 py-8 shadow-lg transition duration-200 rounded-2xl"
+                    className="flex items-center justify-center bg-yellow-300 hover:bg-amber-500 text-black p-4 sm:p-6 md:p-10  shadow-lg transition duration-200 rounded-2xl"
                   >
                     <QrCodeIcon style={{ fontSize: "40px" }} />
                   </button>
 
-                  {/* Share Button */}
                   <button
                     onClick={handleShareLink}
-                    className="flex items-center gap-2 bg-[#3c625d] hover:bg-[#16433f] text-black px-8 py-8  shadow-lg transition duration-200 rounded-2xl"
+                    className="flex items-center justify-center bg-[#3c625d] hover:bg-[#16433f] text-white p-4 sm:p-6 md:p-10  shadow-lg transition duration-200 rounded-2xl"
                   >
                     <ShareIcon style={{ fontSize: "40px" }} />
                   </button>
 
-                  {/* Toast Notification Container */}
                   <ToastContainer
                     position="top-center"
                     autoClose={5000}
@@ -558,41 +572,40 @@ const PetDetails = () => {
               </div>
 
               {/* About Section */}
-              <section className="bg-white p-8 rounded-2xl mt-8 shadow-md">
-                <h3 className="text-center mb-4 text-3xl font-semibold text-amber-800 border-b-2 border-amber-300 pb-2">
+              <section className="bg-white p-6 sm:p-8 rounded-2xl mt-8 shadow-md">
+                <h3 className="text-center mb-4 text-2xl sm:text-3xl font-semibold text-amber-800 border-b-2 border-amber-300 pb-2">
                   About
                 </h3>
-                <p className="text-gray-700 leading-relaxed tracking-wide">
+                <p className="text-gray-700 leading-relaxed tracking-wide text-sm sm:text-base">
                   {updatedPet.about}
                 </p>
               </section>
 
               {/* Info Section */}
-              <section className="mt-8 space-y-8  rounded-2xl bg-white p-6 shadow-lg text-gray-700">
-                {/* Gallery Placeholder */}
-                {/* You can insert a carousel/gallery component here */}
-
-                <hr className="border-amber-300" />
-
-                {/* Owner Information */}
+              <section className="mt-8 space-y-8 rounded-2xl bg-white p-6 sm:p-8 shadow-lg text-gray-700">
+                {/* Owner Info */}
                 <div>
-                  <h4 className="text-xl font-semibold text-amber-900 mb-3 border-b border-amber-200 pb-1">
+                  <h4 className="text-xl sm:text-2xl font-semibold text-amber-900 mb-3 border-b border-amber-200 pb-1">
                     Owner Information
                   </h4>
-                  <p>
-                    <span className="font-semibold text-amber-600">Name:</span>{" "}
-                    {updatedPet.owner?.name || "N/A"}
-                  </p>
-                  <p>
-                    <span className="font-semibold text-amber-600">
-                      Contact:
-                    </span>{" "}
-                    {updatedPet.owner?.contactNumber || "N/A"}
-                  </p>
+                  <div className="text-sm sm:text-base">
+                    <p>
+                      <span className="font-semibold text-amber-600">
+                        Name:
+                      </span>{" "}
+                      {updatedPet.owner?.name || "N/A"}
+                    </p>
+                    <p>
+                      <span className="font-semibold text-amber-600">
+                        Contact:
+                      </span>{" "}
+                      {updatedPet.owner?.contactNumber || "N/A"}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Pet Details Grid */}
-                <div className="grid grid-cols-2 gap-6 bg-amber-50 p-6 rounded-xl shadow-inner">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 bg-amber-50 p-6 rounded-xl shadow-inner text-sm sm:text-base">
                   <div>
                     <p className="font-semibold text-amber-700">Gender</p>
                     <p>{updatedPet.gender || "Unknown"}</p>
@@ -613,10 +626,9 @@ const PetDetails = () => {
                     <p className="font-semibold text-amber-700">DOB</p>
                     <p>{formatDate(updatedPet.DOB)}</p>
                   </div>
-
                   <div>
                     <p className="font-semibold text-amber-700">Age</p>
-                    <p>{pet.age} </p>
+                    <p>{updatedPet.age} yrs</p>
                   </div>
                   <div>
                     <p className="font-semibold text-amber-700">Vaccinated</p>
