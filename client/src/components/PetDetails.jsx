@@ -253,10 +253,10 @@ const PetDetails = () => {
                 className="border border-blue-300 rounded-md px-3 py-1 focus:ring-2 focus:ring-blue-200"
               >
                 <option value="template1">Classic Card</option>
-                {/* <option value="template2">Modern Minimal</option>
+                <option value="template2">Modern Minimal</option>
                 <option value="template3">Bold Highlight</option>
                 <option value="template4">4</option>
-                <option value="template5">5</option> */}
+                <option value="template5">5</option>
               </select>
             </div>
 
@@ -513,45 +513,44 @@ const PetDetails = () => {
               style={{ backgroundImage: "url('/img/bg.jpeg')" }}
             >
               {/* Header Section */}
-              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-md flex flex-col md:flex-row justify-around gap-6 md:gap-10">
-                {/* Left Side - Pet Info */}
-                <div className="flex flex-col items-center md:items-start w-full md:w-2/3">
-                  {updatedPet.image ? (
-                    <img
-                      src={updatedPet.image}
-                      alt="Pet"
-                      className="w-60 h-40 sm:w-100 sm:h-48 md:w-120 md:h-56 object-cover rounded-full border-8 border-white shadow-xl transition-transform duration-300 hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 text-lg font-semibold">
-                      Add Image
-                    </div>
-                  )}
+              <div className="relative bg-white p-6 sm:p-8 rounded-2xl shadow-md flex flex-col md:flex-row justify-around gap-6 md:gap-10 overflow-hidden">
+                {/* Background Image */}
+                {updatedPet.image && (
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${updatedPet.image})` }}
+                  ></div>
+                )}
 
-                  <div className="text-center md:text-left mt-5">
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-amber-900 drop-shadow-md">
+                {/* Optional overlay for readability */}
+                {/* <div className="absolute inset-0 bg-black/10"></div> */}
+
+                {/* Foreground Content */}
+                <div className="relative z-10 flex items-center md:items-end w-full md:w-2/3 text-white ">
+                  <div className="text-center md:text-left bg-black/40 p-4 rounded-lg">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold drop-shadow-lg">
                       {updatedPet.name}
                     </h2>
-                    <p className="mt-2 text-lg text-amber-700 italic tracking-wide">
+                    <p className="mt-2 text-sm italic tracking-wide  ">
                       {updatedPet.breed}
                     </p>
                   </div>
                 </div>
 
                 {/* Right Side - Buttons */}
-                <div className="flex justify-center sm:flex-col md:flex-col items-center gap-4 md:gap-6">
+                <div className="relative z-10 flex justify-center sm:flex-col md:flex-col items-center gap-4 md:gap-6">
                   <button
                     onClick={() =>
                       toggleQRModal(updatedPet.name, `${URL}/pet/${pet._id}`)
                     }
-                    className="flex items-center justify-center bg-yellow-300 hover:bg-amber-500 text-black p-4 sm:p-6 md:p-10  shadow-lg transition duration-200 rounded-2xl"
+                    className="flex items-center justify-center bg-yellow-300 hover:bg-amber-500 text-black p-4 sm:p-6 md:p- shadow-lg transition duration-200 rounded-2xl"
                   >
                     <QrCodeIcon style={{ fontSize: "40px" }} />
                   </button>
 
                   <button
                     onClick={handleShareLink}
-                    className="flex items-center justify-center bg-[#3c625d] hover:bg-[#16433f] text-white p-4 sm:p-6 md:p-10  shadow-lg transition duration-200 rounded-2xl"
+                    className="flex items-center justify-center bg-[#3c625d] hover:bg-[#16433f] text-white p-4 sm:p-6 md:p- shadow-lg transition duration-200 rounded-2xl"
                   >
                     <ShareIcon style={{ fontSize: "40px" }} />
                   </button>

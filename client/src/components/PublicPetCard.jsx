@@ -10,6 +10,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const PublicpetCard = () => {
+  const FrontURL = import.meta.env.VITE_API_FRONT;
   const URL = import.meta.env.VITE_API_URL;
   const [qrModalVisible, setQrModalVisible] = useState(false);
   const [qrData, setQrData] = useState({ name: "", link: "", qrUrl: "" });
@@ -93,7 +94,9 @@ const PublicpetCard = () => {
             {/* Right Side - Buttons */}
             <div className="flex justify-center sm:flex-col md:flex-col items-center gap-4 md:gap-6">
               <button
-                onClick={() => toggleQRModal(pet.name, `${URL}/pet/${pet._id}`)}
+                onClick={() =>
+                  toggleQRModal(pet.name, `${FrontURL}/pet/${pet._id}`)
+                }
                 className="flex items-center justify-center bg-yellow-300 hover:bg-amber-500 text-black p-4 sm:p-6 md:p-10  shadow-lg transition duration-200 rounded-2xl"
               >
                 <QrCodeIcon style={{ fontSize: "40px" }} />
