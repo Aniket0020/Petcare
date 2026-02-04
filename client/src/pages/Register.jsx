@@ -54,7 +54,7 @@ const Register = () => {
         <div className="md:w-[60%] w-full relative">
           <img
             className="w-full h-48 md:h-full object-cover"
-            src="/img/reg2.jpg"
+            src="/img/reg2.webp"
             alt="Pet NFC Tag"
           />
         </div>

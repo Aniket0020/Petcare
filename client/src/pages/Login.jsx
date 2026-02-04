@@ -41,7 +41,7 @@ const Login = () => {
         <div className="md:w-[60%] w-full shadow-2xl rounded-3xl relative">
           <img
             className="w-full h-48 sm:h-64 md:h-full object-cover"
-            src={error ? "/img/login.jpg" : "/img/login2.jpg"}
+            src={error ? "/img/login.webp" : "/img/login2.webp"}
             alt="Pet NFC Tag"
           />
           {/* Error */}
