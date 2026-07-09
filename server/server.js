@@ -11,7 +11,8 @@ const adminRoutes = require("./routes/adminRoutes")
 const adminQR = require("./routes/adminQR")
 const qrRoute = require("./routes/qrRedirect")
 const QR = require("./model/qr")
-
+const authRoutes = require("./middleware/auth")
+const statsRoutes = require("./routes/stats")
 
 
 
@@ -77,6 +78,10 @@ app.use("/doctor", doctorRoutes);
 app.use("/admin", adminRoutes)
 app.use("/adminqr", adminQR)
 app.use("/qr", qrRoute)
+app.use("/auth", authRoutes);
+app.use("/stats", statsRoutes)
+
+
 
 
 

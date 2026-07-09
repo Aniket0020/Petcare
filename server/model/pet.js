@@ -33,7 +33,7 @@ const medicalRecordSchema = new mongoose.Schema({
 // Pet schema
 const petSchema = new mongoose.Schema(
     {
-       
+
 
 
         about: {
@@ -101,7 +101,7 @@ const petSchema = new mongoose.Schema(
         },
         activationCode: String,
         isActivated: { type: Boolean, default: false },
-      
+
     },
     {
         timestamps: true,
@@ -113,14 +113,37 @@ const petSchema = new mongoose.Schema(
 // Virtual to calculate age from DOB
 petSchema.virtual('age').get(function () {
     if (!this.DOB) return null;
+
     const today = new Date();
     const birthDate = new Date(this.DOB);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
+
+    // Calculate differences
+    let years = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    let days = today.getDate() - birthDate.getDate();
+
+    // Adjust if days are negative
+    if (days < 0) {
+        months--;
+        const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += prevMonth.getDate(); // number of days in previous month
     }
-    return age;
+
+    // Adjust if months are negative
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    // Format nicely
+    let result = "";
+    if (years > 0) result += `${years} year${years > 1 ? 's' : ''} `;
+    if (months > 0) result += `${months} month${months > 1 ? 's' : ''} `;
+    if (days > 0) result += `${days} day${days > 1 ? 's' : ''}`;
+
+    return result.trim() || "Less than a day";
 });
+
+
 
 module.exports = mongoose.model("Pet", petSchema);
